@@ -1,0 +1,38 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-6">
+      <img class="thumbnail" src="{{ volcano.Volcano_Image }}">
+      <h4>{{ volcano.Volcano_Name }}</h4>
+      <p>Type: {{ volcano.Volcano_Type }}</p>
+      <p>Country: {{ volcano.Country }}</p>
+      <p>Epoch Period: {{ volcano.epoch_period }}</p>
+      <p>Coordinates: {{ volcano.Latitude }}, {{ volcano.Longitude }}</p>
+    </div>
+    <div class="col-lg-6">
+      <div id="map" style="height: 400px;"></div>
+      <script>
+        function initMap() {
+          var myLatLng = {lat: '{{volcano.Latitude}}', lng: '{{volcano.Longitude}}'};
+
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: myLatLng
+          });
+
+          var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: '{{ volcano.Volcano_Name }}'
+          });
+        }
+      </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLm8whMBDqJpmr2N9vnId88lq6L1r2J5Y&callback=initMap">
+      </script>
+    </div>
+  </div>
+{% endblock content %}

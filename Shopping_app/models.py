@@ -79,7 +79,7 @@ class Volcano(models.Model):
     epoch_period = models.TextField(max_length=100)
     Latitude = models.TextField()
     Longitude = models.TextField()
-    price = models.FloatField()
+    price = models.FloatField(default=0.0)
 
     def __str__(self):
         return f'{self.Volcano_Name} ({self.Volcano_Type}, {self.Country})'
