@@ -12,26 +12,18 @@
       <p>Coordinates: {{ volcano.Latitude }}, {{ volcano.Longitude }}</p>
     </div>
     <div class="col-lg-6">
-      <div id="map" style="height: 400px;"></div>
+      <div id='map' style='width: 100%; height: 400px;'></div>
       <script>
-        function initMap() {
-          var myLatLng = {lat: '{{volcano.Latitude}}', lng: '{{volcano.Longitude}}'};
-
-
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: myLatLng
-          });
-
-          var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: '{{ volcano.Volcano_Name }}'
-          });
-        }
-      </script>
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLm8whMBDqJpmr2N9vnId88lq6L1r2J5Y&callback=initMap">
+        mapboxgl.accessToken = 'pk.eyJ1Ijoia2Vob25nY2hlbiIsImEiOiJjbGd5em50OTcwZW94M2RvZ3Q2eXdsNzFuIn0.XQOHMzb3a3ZLEQlbdBCfgg';
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [{{volcano.Longitude}}, {{volcano.Latitude}}],
+          zoom: 12
+        });
+        var marker = new mapboxgl.Marker()
+          .setLngLat([{{volcano.Longitude}}, {{volcano.Latitude}}])
+          .addTo(map);
       </script>
     </div>
   </div>

@@ -37,7 +37,21 @@ def checkout(request):
     context = {}
     return render(request, 'store/checkout.html', context)
 
+
 def volcano_detail(request, Volcano_ID):
     volcano = get_object_or_404(Volcano, Volcano_ID=Volcano_ID)
     context = {'volcano': volcano}
     return render(request, 'store/volcano_detail.html', context)
+
+'''
+def volcano_detail(request, Volcano_ID):
+    volcano = get_object_or_404(Volcano, pk=Volcano_ID)
+    
+    # Convert latitude and longitude to floats
+    volcano.Latitude = float(volcano.Latitude.replace("°N", ""))
+    volcano.Longitude = float(volcano.Longitude.replace("°E", ""))
+
+    context = {
+        'volcano': volcano
+    }
+    return render(request, 'store/volcano_detail.html', context)'''

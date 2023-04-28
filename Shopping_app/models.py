@@ -70,6 +70,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 
+'''
 class Volcano(models.Model):
     Volcano_ID = models.IntegerField(primary_key=True, unique=True)  # Updated
     Volcano_Name = models.TextField(max_length=100)
@@ -83,6 +84,53 @@ class Volcano(models.Model):
 
     def __str__(self):
         return f'{self.Volcano_Name} ({self.Volcano_Type}, {self.Country})'
+'''
+'''
+class Volcano(models.Model):
+    Volcano_ID = models.IntegerField(primary_key=True, unique=True)
+    Volcano_Name = models.CharField(max_length=100)
+    Volcano_Image = models.URLField(max_length=100)
+    Volcano_Type = models.CharField(max_length=100)
+    Country = models.CharField(max_length=100)
+    epoch_period = models.CharField(max_length=100)
+    Latitude = models.CharField(max_length=50)
+    Longitude = models.CharField(max_length=50)
+    price = models.FloatField(default=0.0)
+
+    def __str__(self):
+        return f'{self.Volcano_Name} ({self.Volcano_Type}, {self.Country})'
+
+    def get_latitude(self):
+        return float(self.Latitude)
+
+    def get_longitude(self):
+        return float(self.Longitude)
+'''
+
+class Volcano(models.Model):
+    Volcano_ID = models.IntegerField(primary_key=True, unique=True)
+    Volcano_Name = models.CharField(max_length=100)
+    Volcano_Image = models.URLField(max_length=100)
+    Volcano_Type = models.CharField(max_length=100)
+    Country = models.CharField(max_length=100)
+    epoch_period = models.CharField(max_length=100)
+    Latitude = models.CharField(max_length=50)
+    Longitude = models.CharField(max_length=50)
+    price = models.FloatField(default=0.0)
+
+    def __str__(self):
+        return f'{self.Volcano_Name} ({self.Volcano_Type}, {self.Country})'
+
+    def get_latitude(self):
+        return float(self.Latitude)
+
+    def get_longitude(self):
+        return float(self.Longitude)
+
+    def save(self, *args, **kwargs):
+        self.Latitude = str(float(self.Latitude.replace("°N", "")))
+        self.Longitude = str(float(self.Longitude.replace("°E", "")))
+        super().save(*args, **kwargs)
 
 
 
