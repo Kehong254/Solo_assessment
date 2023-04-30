@@ -13,8 +13,8 @@ class Volcano(models.Model):
     epoch_period = models.CharField(max_length=100)
     Latitude = models.CharField(max_length=50)
     Longitude = models.CharField(max_length=50)
-    price = models.FloatField(default=0.0)
-    quantity = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(99)])
+    price = models.FloatField()
+    quantity = models.PositiveIntegerField()
 
     def __str__(self):
         return f'{self.Volcano_Name} ({self.Volcano_Type}, {self.Country})'

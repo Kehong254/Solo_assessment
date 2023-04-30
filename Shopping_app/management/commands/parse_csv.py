@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
         try:
             base_dir = Path(__file__).resolve().parent.parent.parent.parent
-            with open(str(base_dir) + '/Shopping_app/Shopping_datas/The_Volcanoes_Of_Earth.csv', newline='', encoding='iso-8859-1', errors='ignore') as csv_file:
+            with open(str(base_dir) + '/Shopping_app/Shopping_datas/The_Volcanoes_Of_Earth2.csv', newline='', encoding='iso-8859-1', errors='ignore') as csv_file:
                 reader = csv.DictReader(csv_file, delimiter=",")
                 for row in reader:
                     print(row)
@@ -27,7 +27,9 @@ class Command(BaseCommand):
                     Country=row['Country'],
                     epoch_period=row['epoch_period'],
                     Latitude=row['Latitude'],
-                    Longitude=row['Longitude']
+                    Longitude=row['Longitude'],
+                    price=row['price'],
+                    quantity=row['quantity']
                     )
 
                     All_data.save()
