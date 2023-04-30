@@ -12,19 +12,47 @@
       <p>Coordinates: {{ volcano.Latitude }}, {{ volcano.Longitude }}</p>
     </div>
     <div class="col-lg-6">
-      <div id='map' style='width: 100%; height: 400px;'></div>
-      <script>
-        mapboxgl.accessToken = 'pk.eyJ1Ijoia2Vob25nY2hlbiIsImEiOiJjbGd5em50OTcwZW94M2RvZ3Q2eXdsNzFuIn0.XQOHMzb3a3ZLEQlbdBCfgg';
-        var map = new mapboxgl.Map({
-          container: 'map',
-          style: 'mapbox://styles/mapbox/streets-v11',
-          center: [{{volcano.Longitude}}, {{volcano.Latitude}}],
-          zoom: 12
-        });
-        var marker = new mapboxgl.Marker()
-          .setLngLat([{{volcano.Longitude}}, {{volcano.Latitude}}])
-          .addTo(map);
-      </script>
+      <div class="map-container">
+        <div id='map' style='width: 100%; height: 400px;'></div>
+      </div>
     </div>
   </div>
+
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.css' rel='stylesheet' />
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+    var longitude = {{ volcano.Longitude }};
+    var latitude = {{ volcano.Latitude }};
+    var data = [
+      {
+        type: 'scattermapbox',
+        lat: [latitude],
+        lon: [longitude],
+        mode: 'markers',
+        marker: {
+          size: 14,
+          color: 'red'
+        },
+        text: ['{{ volcano.Volcano_Name }}']
+      }
+    ];
+
+    var layout = {
+      autosize: true,
+      hovermode: 'closest',
+      mapbox: {
+        center: {
+          lat: latitude,
+          lon: longitude
+        },
+        style: 'mapbox://styles/mapbox/streets-v11',
+        zoom: 12,
+        accessToken: 'pk.eyJ1Ijoia2Vob25nY2hlbiIsImEiOiJjbGZsZnZ5bXIwMWs0M3VsbGc4bHRwZndtIn0.k3xTIksu4mPYb6HY8duAog' // Replace with your Mapbox access token
+      }
+    };
+
+    Plotly.newPlot('map', data, layout);
+  </script>
 {% endblock content %}
