@@ -97,3 +97,29 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  color: #fff;
+  background-color: #4f868c;
+  border-radius: 4px;
+  border: none;
+  margin: 0 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+  background-color: #357c82;
+}
+
+.pagination .active {
+  background-color: #357c82;
+}

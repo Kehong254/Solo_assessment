@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['faxnylon-opinionvitamin-8000.codio-box.uk']
 
+CSRF_TRUSTED_ORIGINS = ['https://faxnylon-opinionvitamin-8000.codio-box.uk']
 
 # Application definition
 
