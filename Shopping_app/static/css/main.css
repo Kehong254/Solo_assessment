@@ -132,3 +132,10 @@ h1,h2,h3,h4,h5,h6{
   margin-top: 20px;
   padding: 10px;
 }
+
+
+.form-inline {
+    position: relative;
+    top: -1px;
+    margin-left: 5px;
+}
