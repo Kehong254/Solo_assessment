@@ -1,9 +1,11 @@
 from django.contrib import admin
 from .models import *
 
+
+
 # Custom admin classes
 class VolcanoAdmin(admin.ModelAdmin):
-    list_display = ('Volcano_ID', 'Volcano_Name', 'Volcano_Type', 'Country')
+    list_display = ('Volcano_ID', 'Volcano_Name', 'Volcano_Type', 'Country', 'epoch_period', 'quantity', 'price')
     search_fields = ('Volcano_Name', 'Country', 'Volcano_Type')
     list_filter = ('Country', 'Volcano_Type')
 
