@@ -43,4 +43,3 @@ class CustomUser(AbstractUser):
 class Customer(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.SET_NULL, related_name='customer', blank=True, null=True)
 
-#test
