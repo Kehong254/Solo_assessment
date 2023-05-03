@@ -26,7 +26,7 @@ class Volcano(models.Model):
       return float(self.Longitude)
 
 class cart(models.Model) :
-  Volcano_ID = models.IntegerField(primary_key=True)
+  id = models.IntegerField(primary_key=True, default=1)
   price = models.FloatField()
   Volcano_Name = models.CharField(max_length=100)
   quantity = models.PositiveIntegerField()
@@ -34,7 +34,14 @@ class cart(models.Model) :
   Volcano_Image = models.URLField(max_length=100)
 
   def __str__(self):
-    return f'{self.Volcano_ID}, {self.price}, {self.Volcano_Name}, {self.quantity}, {self.add_to_cart}, {Volcano_Image}'
+    return f'{self.id}, {self.price}, {self.Volcano_Name}, {self.quantity}, {self.add_to_cart}, {self.Volcano_Image}'
+
+
+
+
+
+
+
 
 '''
 class Order(models.Model):

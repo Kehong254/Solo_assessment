@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
-
+from django.contrib import admin
+from .models import cart
 
 # Custom admin classes
 class VolcanoAdmin(admin.ModelAdmin):
@@ -9,6 +10,11 @@ class VolcanoAdmin(admin.ModelAdmin):
     list_filter = ('Country', 'Volcano_Type')
 
 
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('id', 'Volcano_Name', 'price', 'quantity')
+    list_filter = ('id',)
+
+admin.site.register(cart, CartAdmin)
 admin.site.register(Volcano, VolcanoAdmin)
 
 
