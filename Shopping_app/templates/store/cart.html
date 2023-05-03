@@ -1,0 +1,40 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>Your Cart</h2>
+  {% if cart_items %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+          <tr>
+            <td>{{ item.volcano.Volcano_Name }}</td>
+            <td>${{ item.volcano.price }}</td>
+            <td>
+              <form action="{% url 'update_quantity' item.id %}" method="POST">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                <button type="submit" class="btn btn-outline-secondary">Update</button>
+              </form>
+            </td>
+            <td>${{ item.get_total_price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="float-right">
+      <h5>Total: ${{ total_price }}</h5>
+      <a href="{% url 'checkout' %}" class="btn btn-primary">Checkout</a>
+    </div>
+  {% else %}
+    <p>Your cart is empty.</p>
+  {% endif %}
+{% endblock content %}

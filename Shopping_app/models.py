@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django.core.validators import MaxValueValidator
+from accounts.models import CustomUser
+
 
 class Volcano(models.Model):
   Volcano_ID = models.IntegerField(primary_key=True, unique=True)
@@ -23,11 +25,16 @@ class Volcano(models.Model):
   def get_longitude(self):
       return float(self.Longitude)
 
+class cart(models.Model) :
+  Volcano_ID = models.IntegerField(primary_key=True)
+  price = models.FloatField()
+  Volcano_Name = models.CharField(max_length=100)
+  quantity = models.PositiveIntegerField()
+  add_to_cart = models.BooleanField(default=False)
+  Volcano_Image = models.URLField(max_length=100)
 
-
-
-
-
+  def __str__(self):
+    return f'{self.Volcano_ID}, {self.price}, {self.Volcano_Name}, {self.quantity}, {self.add_to_cart}, {Volcano_Image}'
 
 '''
 class Order(models.Model):
