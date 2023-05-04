@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['faxnylon-opinionvitamin-8000.codio-box.uk', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['https://faxnylon-opinionvitamin-8000.codio-box.uk']
+CSRF_TRUSTED_ORIGINS = ['https://faxnylon-opinionvitamin-8000.codio-box.uk', 'https://127.0.0.1']
 
 # Application definition
 
@@ -54,9 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'store'
-LOGOUT_REDIRECT_URL = 'store'
+
+
 
 ROOT_URLCONF = 'mysite.urls'
 

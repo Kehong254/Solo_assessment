@@ -8,8 +8,14 @@
         <div class="box-element product">
           <h6><strong>{{ volcano.Volcano_Name }}</strong></h6>
           <hr>
-          <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-
+          <!-- Add form here -->
+          <form method="post" action="{% url 'add_to_cart' %}">
+            {% csrf_token %}
+            <input type="hidden" name="name" value="{{ volcano.Volcano_Name }}">
+            <input type="hidden" name="price" value="{{ volcano.price }}">
+            <input type="number" name="quantity" value="1" min="1" required>
+            <button type="submit" class="btn btn-outline-secondary add-btn">Add to Cart</button>
+          </form>
           <a class="btn btn-outline-success" href="{% url 'volcano_detail' volcano.Volcano_ID %}">View</a>
           <h4 style="display: inline-block; float: right"><strong>${{ volcano.price }}</strong></h4>
         </div>
@@ -36,3 +42,4 @@
   </div>
 
 {% endblock content %}
+

@@ -1,25 +1,19 @@
 {% extends 'store/main.html' %}
 
 {% block content %}
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="box-element" id="form-wrapper">
-        <form method="POST">
-          {% csrf_token %}
-          <div class="form-field">
-            <input required class="form-control" type="text" name="username" placeholder="Username..">
-          </div>
-          <div class="form-field">
-            <input required class="form-control" type="password" name="password" placeholder="Password..">
-          </div>
-          <br>
-          <button class="btn btn-primary btn-block" type="submit">Login</button>
-        </form>
-        <div class="text-center mt-3">
-          <p>Don't have an account yet? <a href="{% url 'register' %}">Register now</a>.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
 
+<h2>Login</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <p class="{{ message.tags }}">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<form method="POST" action="{% url 'accounts:login_view' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Login">
+</form>
+
+{% endblock %}
