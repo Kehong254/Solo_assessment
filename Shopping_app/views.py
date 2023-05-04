@@ -48,12 +48,12 @@ def add_to_cart(request):
                 cart_item.save()
             cart_items = cart.objects.all()
             total_price = sum([item.price * item.quantity for item in cart_items])
-            print(f"cart_items: {cart_items}")  # 添加的这行print语句
+            print(f"cart_items: {cart_items}") 
             return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_price': total_price})
         else:
             cart_items = cart.objects.all()
             total_price = sum([item.price * item.quantity for item in cart_items])
-            print(f"cart_items: {cart_items}")  # 添加的这行print语句
+            print(f"cart_items: {cart_items}")
             return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_price': total_price})
     except Exception as e:
         # Handle any exception that might occur

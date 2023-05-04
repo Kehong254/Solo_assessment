@@ -26,7 +26,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .bg-dark{
-	background-color: #4f868c!important;
+background-color: #C23104!important;
 }
 
 #cart-icon{
@@ -139,3 +139,12 @@ h1,h2,h3,h4,h5,h6{
     margin-left: 5px;
 }
 
+.btn-primary {
+  background-color: #4d7aad;
+  border-color: #4d7aad;
+  border-radius: 5px;
+}
+
+.btn-warning {
+	border-radius: 5px
+}
