@@ -6,6 +6,19 @@ from .models import Cart, CartItem, Volcano, Address, Order, OrderItem
 from django.utils import timezone
 
 
+
+
+def volcano_list(request):
+    volcanoes = Volcano.objects.all()
+    paginator = Paginator(volcanoes, 25)  # 每页25个火山
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'store/volcano_list.html', {'page_obj': page_obj})
+
+
+
+
 @login_required
 def store(request):
     query = request.GET.get('query')

@@ -29,10 +29,11 @@ h1,h2,h3,h4,h5,h6{
 background-color: #C23104!important;
 }
 
+
 #cart-icon{
-	width:25px;
+	width:40px;
 	display: inline-block;
-	margin-left: 15px;
+	margin-left: 30px;
 }
 
 #cart-total{
@@ -148,3 +149,4 @@ background-color: #C23104!important;
 .btn-warning {
 	border-radius: 5px
 }
+
