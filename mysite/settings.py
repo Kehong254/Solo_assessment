@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Shopping_app',
     'accounts',
+    'django_behave',
     
 ]
-
+TEST_RUNNER = 'django_behave.runner.BehaveDrivenTestRunner' 
 #AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
