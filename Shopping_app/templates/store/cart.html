@@ -4,11 +4,8 @@
 
 <h2>Cart</h2>
 
-{% if error_message %}
-    <p>{{ error_message }}</p>
-{% endif %}
 
-{% if cart_items %}
+
     <table>
         <tr>
             <th>Name</th>
@@ -16,19 +13,16 @@
             <th>Quantity</th>
             <th>Action</th>
         </tr>
-        {% for cart_item in cart_items %}
+        {% for cart_item in carts %}
             <tr>
-                <td>{{ cart_item.volcano.Volcano_Name }}</td>
-                <td>{{ cart_item.volcano.price }}</td>
+                <td>{{ cart_item.name}}</td>
+                <td>{{ cart_item.price}}</td>
                 <td>{{ cart_item.quantity }}</td>
                 <td>
-                    <a href="{% url 'remove_from_cart' cart_item.id %}">Remove</a>
+
                 </td>
             </tr>
         {% endfor %}
     </table>
-{% else %}
-    <p>Your cart is empty.</p>
-{% endif %}
 
 {% endblock %}
