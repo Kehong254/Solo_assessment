@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
-from .models import Cart, CartItem, Volcano
+from .models import Cart, CartItem, Volcano, Address, Order, OrderItem
+from django.utils import timezone
+
 
 @login_required
 def store(request):
@@ -57,10 +59,62 @@ def remove_cart_item(request, cart_item_id):
     cart_item.delete()
     return redirect('view_cart')
 
+
+
+
 @login_required
 def checkout(request):
     cart = get_object_or_404(Cart, user=request.user)
     cart_items = cart.cart_items.all()
     total_price = cart.total_price
-    context = {'cart': cart, 'cart_items': cart_items, 'total_price': total_price}
+    address = None  # initialize address to None
+
+    if request.method == 'POST':
+        # get address data from POST request
+        line_1 = request.POST['line_1']
+        line_2 = request.POST['line_2']
+        country = request.POST['country']
+        postal_code = request.POST['postal_code']
+        phone_number = request.POST['phone_number']
+
+        # create new address instance and associate it with current user
+        address = Address.objects.create(user=request.user,
+                                         line_1=line_1,
+                                         line_2=line_2,
+                                         country=country,
+                                         postal_code=postal_code,
+                                         phone_number=phone_number)
+
+    context = {'cart': cart, 'cart_items': cart_items, 'total_price': total_price, 'address': address}
     return render(request, 'store/checkout.html', context)
+
+
+
+
+@login_required
+def place_order(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    cart_items = cart.cart_items.all()
+    total_price = cart.total_price
+
+    # Create a new order and order items for each item in the cart
+    order = Order.objects.create(
+        user_id=request.user.id,
+        user_name=request.user.username,
+        user_phone='0123456789', # replace with user's phone number from address model
+        total_cost=total_price
+    )
+    for item in cart_items:
+        OrderItem.objects.create(
+            order=order,
+            volcano=item.volcano,
+            quantity=item.quantity
+        )
+
+    # Clear the cart
+    cart.clear()
+
+    # Render the order confirmation page with the order information
+    order_items = order.order_items.all()
+    context = {'order': order, 'order_items': order_items}
+    return render(request, 'store/order_confirmation.html', context)

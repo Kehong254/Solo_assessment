@@ -1,0 +1,32 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Order Confirmation</h1>
+  <p>Thank you for your order! Your order details are:</p>
+  <ul>
+    <li>User ID: {{ order.user_id }}</li>
+    <li>User Name: {{ order.user_name }}</li>
+    <li>User Phone: {{ order.user_phone }}</li>
+    <li>Total Cost: {{ order.total_cost }}</li>
+  </ul>
+
+  <h2>Order Items</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Volcano Name</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order_items %}
+        <tr>
+          <td>{{ item.volcano.Volcano_Name }}</td>
+          <td>{{ item.quantity }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+    <a href="{% url 'store' %}" class="btn btn-primary">Back to Store</a>
+{% endblock %}

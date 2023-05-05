@@ -1,7 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-import datetime
+from django.utils import timezone
+
 
 
 class Volcano(models.Model):
@@ -24,7 +25,7 @@ class Volcano(models.Model):
 class Cart(models.Model):
     cart_id = models.IntegerField(primary_key=True, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    created_at = models.DateTimeField(default=datetime.datetime.now)
+    created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -71,3 +72,39 @@ class CartItem(models.Model):
             self.save()
         else:
             self.delete()
+
+class Address(models.Model):
+    Address_id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    line_1 = models.CharField(max_length=100)
+    line_2 = models.CharField(max_length=100)
+    country = models.CharField(max_length=50)
+    postal_code = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.user.username}'s address ({self.Address_id})"
+
+
+class Order(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    user_id = models.IntegerField()
+    user_name = models.CharField(max_length=100)
+    user_phone = models.CharField(max_length=20)
+    total_cost = models.FloatField()
+    order_items = models.ManyToManyField(Volcano, through='OrderItem')
+
+    def __str__(self):
+        return f"Order {self.order_id} by {self.user_name}, total cost: ${self.total_cost}"
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    volcano = models.ForeignKey(Volcano, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.quantity} x {self.volcano.Volcano_Name} (Order {self.order.order_id})"
+
+
+

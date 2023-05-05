@@ -1,0 +1,43 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Checkout</h1>
+
+  <p>Total price: {{ total_price }}</p>
+
+  <h2>Shipping Address</h2>
+  <form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <div>
+      <label for="id_line_1">Address Line 1:</label>
+      <input type="text" id="id_line_1" name="line_1">
+    </div>
+    <div>
+      <label for="id_line_2">Address Line 2:</label>
+      <input type="text" id="id_line_2" name="line_2">
+    </div>
+    <div>
+      <label for="id_country">Country:</label>
+      <input type="text" id="id_country" name="country">
+    </div>
+    <div>
+      <label for="id_postal_code">Postal Code:</label>
+      <input type="text" id="id_postal_code" name="postal_code">
+    </div>
+    <div>
+      <label for="id_phone_number">Phone Number:</label>
+      <input type="text" id="id_phone_number" name="phone_number">
+    </div>
+    <button type="submit" class="btn btn-primary">Place Order</button>
+  </form>
+
+  <h2>Cart Items</h2>
+  <ul>
+    {% for item in cart_items %}
+      <li>
+        {{ item.volcano.Volcano_Name }} x {{ item.quantity }} - ${{ item.item_price }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
