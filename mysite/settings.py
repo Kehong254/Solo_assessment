@@ -27,9 +27,9 @@ DEBUG = True
 
 TIME_ZONE = 'Asia/Shanghai'
 
-ALLOWED_HOSTS = ['faxnylon-opinionvitamin-8000.codio-box.uk']
+ALLOWED_HOSTS = ['faxnylon-opinionvitamin-8000.codio-box.uk', ''kehong-assessment.onrender.com'']
 
-CSRF_TRUSTED_ORIGINS = ['https://faxnylon-opinionvitamin-8000.codio-box.uk']
+CSRF_TRUSTED_ORIGINS = ['https://faxnylon-opinionvitamin-8000.codio-box.uk', ''https://kehong-assessment.onrender.com'']
 
 # Application definition
 
