@@ -34,6 +34,22 @@ def volcano_detail(request, Volcano_ID):
     context = {'volcano': volcano}
     return render(request, 'store/volcano_detail.html', context)
 
+
+
+@login_required
+def create_empty_cart(request):
+    # 获取当前用户的购物车，如果不存在则创建
+    cart, created = Cart.objects.get_or_create(user=request.user)
+
+    # 如果已经创建了购物车，那么跳转到 'store' 页面
+    if not created:
+        return redirect('store')
+
+    # 渲染页面
+    context = {}
+    return render(request, 'store/create_empty_cart.html', context)
+
+
 @login_required
 def view_cart(request):
     cart = get_object_or_404(Cart, user=request.user)
@@ -62,7 +78,7 @@ def remove_cart_item(request, cart_item_id):
 
 
 
-@login_required
+@login_required(login_url='login_view')
 def checkout(request):
     cart = get_object_or_404(Cart, user=request.user)
     cart_items = cart.cart_items.all()

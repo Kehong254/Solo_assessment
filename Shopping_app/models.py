@@ -75,7 +75,7 @@ class CartItem(models.Model):
 
 class Address(models.Model):
     Address_id = models.AutoField(primary_key=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     line_1 = models.CharField(max_length=100)
     line_2 = models.CharField(max_length=100)
     country = models.CharField(max_length=50)
@@ -105,6 +105,3 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.volcano.Volcano_Name} (Order {self.order.order_id})"
-
-
-

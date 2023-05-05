@@ -24,7 +24,7 @@ def register(request):
         user = User.objects.create_user(username=username, password=password1, email=email)
         user.save()
         login(request, user)
-        return redirect('store')
+        return redirect('create_empty_cart')
     return render(request, 'register.html')
 
 
@@ -60,5 +60,5 @@ def guest_login(request):
     user.backend = 'django.contrib.auth.backends.ModelBackend'
     login(request, user)
     
-    # redirect to the store page
-    return redirect('store')
+    # redirect to the create_empty_cart page
+    return redirect('create_empty_cart')

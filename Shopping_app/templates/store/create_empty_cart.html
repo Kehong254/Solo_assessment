@@ -1,0 +1,17 @@
+{% extends 'store/main.html' %}
+
+{% block content %}
+
+<h2>Create an Empty Cart</h2>
+
+<p>This page allows you to create an empty cart. Once you create a cart, you can start adding items to it by browsing our selection of products.</p>
+
+<p>This is a shopping site for buying volcanoes. Interestingly the volcanoes are not removable. So, this website is just a little joke for the users.</p>
+
+
+<form method="POST" action="{% url 'create_empty_cart' %}">
+    {% csrf_token %}
+    <input type="submit" value="Create Cart">
+</form>
+
+{% endblock %}
