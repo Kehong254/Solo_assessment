@@ -1,4 +1,4 @@
-{% extends 'store/main.html' %}
+{{% extends 'store/main.html' %}
 
 {% block content %}
 
@@ -14,4 +14,44 @@
     <input type="submit" value="Create Cart">
 </form>
 
+<style>
+
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  input[type="submit"] {
+    background-color: #4d7aad;
+    border-color: #4d7aad;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #357c82;
+  }
+</style>
+
 {% endblock %}
+

@@ -1,0 +1,39 @@
+982cbba7	KEHONG CHEN	Fri May 5 19:14:57 2023	settings host
+20602044	KEHONG CHEN	Fri May 5 19:14:34 2023	settings host
+6b18b50b	KEHONG CHEN	Fri May 5 19:11:48 2023	settings host
+e4acba9e	KEHONG CHEN	Fri May 5 19:04:57 2023	gunicorn
+3b84c02e	KEHONG CHEN	Fri May 5 18:59:01 2023	requirements
+698bea6b	KEHONG CHEN	Fri May 5 18:45:16 2023	requirement
+f63a1b61	KEHONG CHEN	Fri May 5 18:44:16 2023	requirement
+7ed213b3	Kehong254	Fri May 5 18:37:48 2023	Update README.md
+184a4eeb	KEHONG CHEN	Fri May 5 17:02:06 2023	fix cart
+506319f9	KEHONG CHEN	Fri May 5 15:27:20 2023	add behave and chart
+0237f15f	KEHONG CHEN	Fri May 5 14:46:43 2023	views
+b6659dd1	KEHONG CHEN	Fri May 5 11:22:28 2023	add Order
+cbabf37b	KEHONG CHEN	Fri May 5 09:23:33 2023	debug
+1f28d07d	KEHONG CHEN	Fri May 5 08:14:26 2023	create cart
+b8186c55	rustinchen	Fri May 5 00:12:56 2023	fix cart
+43ba6ef7	rustinchen	Thu May 4 22:08:26 2023	fix cart
+f089090d	KEHONG CHEN	Thu May 4 09:58:16 2023	fix static and add logo
+1c71915a	KEHONG CHEN	Wed May 3 19:11:04 2023	fix cart
+80383e75	rustinchen	Wed May 3 17:59:33 2023	add cart
+c8b7bde4	KEHONG CHEN	Wed May 3 14:14:26 2023	Removed some features
+f5c23f12	KEHONG CHEN	Wed May 3 13:31:19 2023	admin/accounts test
+6a65fe75	KEHONG CHEN	Wed May 3 13:29:32 2023	models/accounts test
+f05e12cc	KEHONG CHEN	Wed May 3 13:27:49 2023	clear cart
+40b66722	rustinchen	Tue May 2 16:58:57 2023	add Descriptive statements
+6f20b5e6	KEHONG CHEN	Tue May 2 14:11:28 2023	Added user login and registration functions, modified style
+fcaa50d5	KEHONG CHEN	Mon May 1 19:45:11 2023	add .venv and db
+b5b5ca71	KEHONG CHEN	Sun Apr 30 17:20:39 2023	add map
+803c3aed	rustinchen	Sun Apr 30 16:05:23 2023	fix db
+05472c93	KEHONG CHEN	Sun Apr 30 12:47:38 2023	add paginator and static of paginator fix admin
+63fcaf8c	KEHONG CHEN	Fri Apr 28 13:41:37 2023	fix map
+fb57a90b	KEHONG CHEN	Wed Apr 26 22:52:05 2023	create detail page
+4ceac2e2	KEHONG CHEN	Wed Apr 26 20:09:02 2023	create static templates and change settings and  models
+1c29ff4d	KEHONG CHEN	Tue Apr 25 15:04:42 2023	Front-end style modification
+e5a735fb	KEHONG CHEN	Tue Apr 25 14:50:28 2023	Front-end style modification
+5e41070b	KEHONG CHEN	Tue Apr 25 13:35:16 2023	add static
+6ad3f769	KEHONG CHEN	Tue Apr 25 13:12:42 2023	create simple tamplates and views url path
+bc8e78d1	KEHONG CHEN	Tue Apr 25 11:33:02 2023	Create a database
+cc04f062	KEHONG CHEN	Tue Apr 25 11:09:08 2023	building django
+d85835a3	Kehong254	Tue Apr 25 10:52:46 2023	Initial commit

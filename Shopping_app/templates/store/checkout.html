@@ -29,9 +29,7 @@
       <label for="id_phone_number">Phone Number:</label>
       <input type="text" id="id_phone_number" name="phone_number">
     </div>
-<a href="{% url 'place_order' %}" class="btn btn-primary">Place Order</a>
-
-
+    <a href="{% url 'place_order' %}" class="btn btn-primary">Place Order</a>
   </form>
 
   <h2>Cart Items</h2>
@@ -42,4 +40,57 @@
       </li>
     {% endfor %}
   </ul>
+
+  <style>
+
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 4px;
+      border: 1px solid hsl(0, 0%, 80%);
+      box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+      padding: 10px;
+    }
+
+    label {
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      border: 1px solid hsl(0, 0%, 80%);
+      border-radius: 4px;
+    }
+
+    .btn-primary {
+      background-color: #4d7aad;
+      border-color: #4d7aad;
+      border-radius: 5px;
+      color: #ffffff;
+      text-align: center;
+      padding: 10px;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #357c82;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+  </style>
 {% endblock %}

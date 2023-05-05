@@ -2,6 +2,25 @@
 {% load static %}
 
 {% block content %}
+  <style>
+    /* Add your additional CSS styles here */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+  </style>
+
   <h1>Order Confirmation</h1>
   <p>Thank you for your order! Your order details are:</p>
   <ul>
@@ -28,5 +47,5 @@
       {% endfor %}
     </tbody>
   </table>
-    <a href="{% url 'store' %}" class="btn btn-primary">Back to Store</a>
+  <a href="{% url 'store' %}" class="btn btn-primary">Back to Store</a>
 {% endblock %}
