@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-c)9r(u6we*_m5*7ypd_1$a4ghul31@6-8dg#obf#g%r#or0m_g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['faxnylon-opinionvitamin-8000.codio-box.uk', '127.0.0.1']
+ALLOWED_HOSTS = ['faxnylon-opinionvitamin-8000.codio-box.uk']
 
-CSRF_TRUSTED_ORIGINS = ['https://faxnylon-opinionvitamin-8000.codio-box.uk', 'https://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://faxnylon-opinionvitamin-8000.codio-box.uk']
 
 # Application definition
 
@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     
 ]
 
+#AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,10 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
-
-
 
 
 ROOT_URLCONF = 'mysite.urls'

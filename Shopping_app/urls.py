@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
     path('', views.store, name='store'),
-    path('volcano/<int:Volcano_ID>/', views.volcano_detail, name='volcano_detail'),
-    path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
-    path('remove_from_cart/<int:cart_item_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('cart/', views.view_cart, name='view_cart'),
+    path('cart/update/<int:cart_item_id>/', views.update_cart_item, name='update_cart_item'),
+    path('cart/checkout/', views.checkout, name='checkout'),
+    path('volcano_detail/<int:Volcano_ID>/', views.volcano_detail, name='volcano_detail'),
+    path('cart/remove/<int:cart_item_id>/', views.remove_cart_item, name='remove_cart_item')
+
 ]

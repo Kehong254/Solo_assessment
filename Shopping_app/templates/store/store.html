@@ -9,10 +9,9 @@
           <h6><strong>{{ volcano.Volcano_Name }}</strong></h6>
           <hr>
           <!-- Add form here -->
-          <form method="POST" action="{% url 'add_to_cart' %}">
+          <form method="POST" action="{% url 'store' %}">
             {% csrf_token %}
-            <input type="hidden" name="name" value="{{ volcano.Volcano_Name }}">
-            <input type="hidden" name="price" value="{{ volcano.price }}">
+            <input type="hidden" name="Volcano_ID" value="{{ volcano.Volcano_ID }}">
             <input type="number" name="quantity" value="1" min="1" required>
             <button type="submit" class="btn btn-outline-secondary add-btn">Add to Cart</button>
           </form>
@@ -42,4 +41,3 @@
   </div>
 
 {% endblock content %}
-

@@ -42,11 +42,17 @@
       </div>
 
       <!-- Add Cart link here -->
-      <a href="{% url 'add_to_cart' %}" class="btn btn-outline-info mr-2">View Cart</a>
+      <a href="{% url 'view_cart' %}" class="btn btn-outline-info mr-2">View Cart</a>
+      {% if user.is_authenticated and user.cart.total_items > 0 %}
+        <a href="{% url 'view_cart' %}" class="btn btn-outline-info mr-2">
+          View Cart
+          <span class="badge badge-pill badge-success">{{ user.cart.total_items }}</span>
+        </a>
+      {% endif %}
 
       <div class="form-inline my-2 my-lg-0">
         {% if user.is_authenticated %}
-          <p class="my-2 my-sm-0 text-white">Welcome！👏 {{ user.email }}</p>
+          <p class="my-2 my-sm-0 text-white">Welcome！👏 {{ user.username }}</p>
           <a href="{% url 'accounts:logout_view' %}" class="btn btn-warning">Logout</a>
         {% else %}
           <p class="my-2 my-sm-0 text-white">Not logged in yet, please do!</p>

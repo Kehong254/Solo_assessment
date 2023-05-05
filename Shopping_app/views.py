@@ -1,17 +1,10 @@
-from .models import Volcano
-from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator
-from django.db.models import Q
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Volcano, Cart, CartItem
-#ignore warning of query
-import warnings
-from django.core.paginator import UnorderedObjectListWarning
+from django.db.models import Q
+from django.core.paginator import Paginator
+from .models import Cart, CartItem, Volcano
 
-warnings.simplefilter('ignore', UnorderedObjectListWarning)
-
-# Create your views here.
-
+@login_required
 def store(request):
     query = request.GET.get('query')
     volcanoes = Volcano.objects.all()
@@ -21,6 +14,18 @@ def store(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    if request.method == 'POST':
+        volcano_id = request.POST.get('Volcano_ID')
+        quantity = request.POST.get('quantity', 1)
+        volcano = Volcano.objects.get(pk=volcano_id)
+        print("here!")
+        print(volcano_id)
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, volcano=volcano)
+        cart_item.quantity += int(quantity)
+        cart_item.save()
+        return redirect('store')
+
     context = {'page_obj': page_obj}
     return render(request, 'store/store.html', context)
 
@@ -29,59 +34,37 @@ def volcano_detail(request, Volcano_ID):
     context = {'volcano': volcano}
     return render(request, 'store/volcano_detail.html', context)
 
-# @login_required(login_url='accounts:login_view')
-def add_to_cart(request):
+@login_required
+def view_cart(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    cart_items = cart.cart_items.all()
+    context = {'cart': cart, 'cart_items': cart_items}
+    return render(request, 'store/cart.html', context)
+
+@login_required
+def update_cart_item(request, cart_item_id):
+    cart_item = get_object_or_404(CartItem, pk=cart_item_id)
     if request.method == 'POST':
-        try:
-            name = request.POST['name']
-            price = float(request.POST['price'].replace(',', '.'))
-            quantity = int(request.POST.get('quantity'))
+        quantity = request.POST.get('quantity')
+        if quantity:
+            cart_item.quantity = int(quantity)
+            cart_item.save()
+        else:
+            cart_item.delete()
+    return redirect('view_cart')
 
-            # volcano = get_object_or_404(Volcano, Volcano_Name=name, price=price)  # Change Product to Volcano
-            cart,created = Cart.objects.get_or_create(name=name, price=price,quantity=quantity)
-
-            print(name,price,quantity)
-            print(cart)
-            # if not created:
-            #     cart.quantity += 1
-            #     cart.save()
-            #
-            # cart=
-            # if not created:
-            #     cart_items = CartItem.objects.filter(cart=cart, volcano=volcano)  # Change product to volcano
-            #     if cart_items.exists():
-            #         cart_item = cart_items.first()
-            #         cart_item.quantity += quantity
-            #         cart_item.save()
-            #     else:
-            #         cart_item = CartItem.objects.create(cart=cart, volcano=volcano, quantity=quantity)  # Change product to volcano
-            # else:
-            #     cart_item = CartItem.objects.create(cart=cart, volcano=volcano, quantity=quantity)  # Change product to volcano
-
-        except:
-            error_message = "Failed to add item to cart. Please try again later."
-            return render(request, 'store/cart.html', {'error_message': error_message})
-
-        carts= Cart.objects.all()
-        return render(request, 'store/cart.html', {'carts': carts, })  # Change new_product to new_volcano
-    # else:
-        # cart = get_object_or_404(Cart, name=request.user)
-        # cart_items = CartItem.objects.filter(cart=cart)
-        print(cart)
-        # return render(request, 'store/cart.html', {'cart_items': cart_items})
+@login_required
+def remove_cart_item(request, cart_item_id):
+    cart_item = get_object_or_404(CartItem, pk=cart_item_id)
+    cart = get_object_or_404(Cart, user=request.user)
+    cart.remove_item(cart_item)
+    return redirect('view_cart')
 
 
-@login_required()
-def remove_from_cart(request, cart_item_id):
-    try:
-        cart_item_id = int(cart_item_id)
-        cart_item = get_object_or_404(CartItem, id=cart_item_id, cart__user=request.user)
-        cart_item.delete()
-        return redirect('cart')
-    except CartItem.DoesNotExist:
-        error_message = "Failed to remove item from cart. Please try again later."
-        return render(request, 'store/cart.html', {'error_message': error_message})
-    except ValueError:
-        error_message = "Invalid cart item ID."
-        return render(request, 'store/cart.html', {'error_message': error_message})
-
+@login_required
+def checkout(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    cart_items = cart.cart_items.all()
+    total_price = cart.total_price
+    context = {'cart': cart, 'cart_items': cart_items, 'total_price': total_price}
+    return render(request, 'store/checkout.html', context)
