@@ -18,8 +18,6 @@ def store(request):
         volcano_id = request.POST.get('Volcano_ID')
         quantity = request.POST.get('quantity', 1)
         volcano = Volcano.objects.get(pk=volcano_id)
-        print("here!")
-        print(volcano_id)
         cart, created = Cart.objects.get_or_create(user=request.user)
         cart_item, created = CartItem.objects.get_or_create(cart=cart, volcano=volcano)
         cart_item.quantity += int(quantity)
@@ -56,10 +54,8 @@ def update_cart_item(request, cart_item_id):
 @login_required
 def remove_cart_item(request, cart_item_id):
     cart_item = get_object_or_404(CartItem, pk=cart_item_id)
-    cart = get_object_or_404(Cart, user=request.user)
-    cart.remove_item(cart_item)
+    cart_item.delete()
     return redirect('view_cart')
-
 
 @login_required
 def checkout(request):

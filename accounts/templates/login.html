@@ -16,5 +16,6 @@
     <input type="submit" value="Login">
 </form>
 <p>Don't have an account? <a href="{% url 'accounts:register' %}">Register</a></p>
+<a href="{% url 'accounts:guest_login' %}" class="btn btn-secondary">Guest Login</a>
 {% endblock %}
 

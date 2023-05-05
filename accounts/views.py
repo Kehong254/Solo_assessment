@@ -4,8 +4,10 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.urls import reverse
+import uuid
 
 # Create your views here.
+
 
 def register(request):
     if request.method == 'POST':
@@ -19,10 +21,12 @@ def register(request):
         elif username == '':
             error_message = 'Username cannot be empty'
             return render(request, 'register.html', {'error_message': error_message})
-        cuser = User.objects.create_user(username=username, password=password1, email=email)
-        cuser.save()
+        user = User.objects.create_user(username=username, password=password1, email=email)
+        user.save()
+        login(request, user)
         return redirect('store')
     return render(request, 'register.html')
+
 
 
 def login_view(request):
@@ -45,3 +49,16 @@ def logout_view(request):
     logout(request)
     return redirect(reverse('store'))
 
+def guest_login(request):
+    # create a temporary user with a unique username and password
+    username = 'guest' + str(uuid.uuid4().hex)[:8]
+    password = uuid.uuid4().hex
+    user = User.objects.create_user(username=username, password=password)
+    user.save()
+    
+    # log the user in
+    user.backend = 'django.contrib.auth.backends.ModelBackend'
+    login(request, user)
+    
+    # redirect to the store page
+    return redirect('store')
